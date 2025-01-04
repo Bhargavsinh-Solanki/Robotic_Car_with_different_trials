@@ -13,22 +13,20 @@ def test_Led():
         led.ledIndex(0x80,255,255,255)  #white'''
         print ("The LED has been lit, the color is red orange yellow green cyan-blue blue white")
         time.sleep(3)               #wait 3s
-        led.colorWipe(led.strip, Color(0,0,0))  #turn off the light
+        led.colorWipe([0,0,0])  #turn off the light
         print ("\nEnd of program")
     except KeyboardInterrupt:
-        led.colorWipe(led.strip, Color(0,0,0))  #turn off the light
-        print ("\nEnd of program")
-
-        
+        led.colorWipe([0,0,0])  #turn off the light
+        print ("\nEnd of program") 
         
 from Motor import *            
 PWM=Motor()          
 def test_Motor(): 
     try:
-        PWM.setMotorModel(1000,1000,1000,1000)       #Forward
+        PWM.setMotorModel(1000,1000,1000,1000)         #Forward
         print ("The car is moving forward")
         time.sleep(1)
-        PWM.setMotorModel(-1000,-1000,-1000,-1000)   #Back
+        PWM.setMotorModel(-1000,-1000,-1000,-1000)     #Back
         print ("The car is going backwards")
         time.sleep(1)
         PWM.setMotorModel(-1500,-1500,2000,2000)       #Turn left
@@ -44,20 +42,20 @@ def test_Motor():
         print ("The car is moving right")  
         time.sleep(1)    
             
-        PWM.setMotorModel(0,2000,2000,0)       #Move diagonally to the left and forward
+        PWM.setMotorModel(0,2000,2000,0)         #Move diagonally to the left and forward
         print ("The car is moving diagonally to the left and forward")  
         time.sleep(1)
         PWM.setMotorModel(0,-2000,-2000,0)       #Move diagonally to the right and backward
         print ("The car is moving diagonally to the right and backward")  
         time.sleep(1) 
-        PWM.setMotorModel(2000,0,2000,00)       #Move diagonally to the right and forward
+        PWM.setMotorModel(2000,0,0,2000)         #Move diagonally to the right and forward
         print ("The car is moving diagonally to the right and forward")  
         time.sleep(1)
-        PWM.setMotorModel(-2000,0,-2000,0)       #Move diagonally to the left and backward
+        PWM.setMotorModel(-2000,0,0,-2000)       #Move diagonally to the left and backward
         print ("The car is moving diagonally to the left and backward")  
         time.sleep(1) 
         
-        PWM.setMotorModel(0,0,0,0)                   #Stop
+        PWM.setMotorModel(0,0,0,0)               #Stop
         print ("\nEnd of program")
     except KeyboardInterrupt:
         PWM.setMotorModel(0,0,0,0)
@@ -86,13 +84,7 @@ from Line_Tracking import *
 line=Line_Tracking()
 def test_Infrared():
     try:
-        while True:
-            if GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)==True and GPIO.input(line.IR03)!=True:
-                print ('Middle')
-            elif GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)==True:
-                print ('Right')
-            elif GPIO.input(line.IR01)==True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)!=True:
-                print ('Left')
+        line.test_Infrared()
     except KeyboardInterrupt:
         print ("\nEnd of program")
 
